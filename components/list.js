@@ -84,20 +84,10 @@ function DisplayPlayers({ data_player, data_club }) {
   if (data_player !== undefined) {
     const buf = sort_player(data_player, data_club);
 
-    // const show_detail = (event) => {
-    //   event.preventDefault();
-    //   console.log("ça clic, ça claque");
-    // };
-
     return (
       <div>
         {buf.map((elem) => (
           <ButtonPlayer elem={elem} />
-          // <div style={{ cursor: "pointer" }} onClick={show_detail}>
-          //   <div>{elem.name}</div>
-          //   <div>{elem.pos}</div>
-          //   <div>{elem.club_name}</div>
-          // </div>
         ))}
       </div>
     );
