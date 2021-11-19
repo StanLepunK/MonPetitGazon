@@ -1,6 +1,11 @@
 import React from "react";
 import { View, Button } from "react-native";
 import { useState, useEffect } from "react";
+import { useContext } from "react";
+
+import { useToggle } from "../hooks/toggle";
+
+import { MpgContext } from "../main";
 
 function DisplayClubs({ data }) {
   if (data !== undefined && data.championshipClubs !== undefined) {
@@ -67,16 +72,43 @@ function sort_player(data_player, data_club) {
 }
 
 function ButtonPlayer({ elem }) {
-  const show_detail = (event) => {
-    event.preventDefault();
-    console.log("ça clic, ça claque, ça déboite");
+  const { id, set_id } = useContext(MpgContext);
+  // const [id_url, set_id_url] = useState(null);
+  const [is, set_is] = useToggle(false);
+  // const show_detail = (event) => {
+  //   event.preventDefault();
+  //   console.log("ça clic, ça claque, ça déboite");
+  // };
+  // function set_page_detail(value) {
+  //   set_id(value);
+  //   // console.log("id", id);
+  // }
+
+  // useEffect(() => {
+  //   set_id_url();
+  // }, []);
+
+  const set_page_detail = (value) => {
+    set_id(value);
   };
+
   return (
-    <div style={{ cursor: "pointer" }} onClick={show_detail}>
+    // <div style={{ cursor: "pointer" }} onClick={set_page_detail(elem.id)}>
+    // <button style={{ cursor: "pointer" }} onClick={set_page_detail(elem.id)}>
+    <button style={{ cursor: "pointer" }} onClick={set_is}>
+      {/* {console.log("id", id)} */}
+      <div>{String(is)}</div>
       <div>{elem.name}</div>
       <div>{elem.pos}</div>
       <div>{elem.club_name}</div>
-    </div>
+      <div>{elem.id}</div>
+      <div>select id {id}</div>
+      {is ? set_page_detail(elem.id) : set_page_detail(id)}
+      {set_is}
+      {/* <div>select id url {id_url}</div> */}
+      {/* <div>{is}</div> */}
+      {/* <div>{set_id(elem.id)}</div> */}
+    </button>
   );
 }
 
@@ -87,7 +119,9 @@ function DisplayPlayers({ data_player, data_club }) {
     return (
       <div>
         {buf.map((elem) => (
+          // <MpgContext.Provider>
           <ButtonPlayer elem={elem} />
+          // </MpgContext.Provider>
         ))}
       </div>
     );
@@ -95,7 +129,7 @@ function DisplayPlayers({ data_player, data_club }) {
   return null;
 }
 
-export function List() {
+export function Home() {
   const [data_club, set_data_club] = useState({});
   const [data_player, set_data_player] = useState({});
 

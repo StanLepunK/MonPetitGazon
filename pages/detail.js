@@ -1,8 +1,12 @@
 import React from "react";
 import { View } from "react-native";
 import { useState, useEffect } from "react";
+import { useContext } from "react";
 
-export function Player({ id }) {
+import { MpgContext } from "../main";
+
+export function Detail() {
+  const id = useContext(MpgContext);
   const [data_detail, set_data_detail] = useState({});
 
   function load_detail(id) {
