@@ -49,11 +49,7 @@ function sort_player(data_player, data_club) {
       list_club.map((key_c, elem_c) => {
         const club = data_club.championshipClubs[key_c];
         if (player.ultraPosition > rank && player.clubId === key_c) {
-          let temp_club_name = "Dynamo de Belleville";
-          console.log("compare", player.clubId, key_c);
-          // if (player.clubId === key_c) {
-          temp_club_name = club.name["fr-FR"];
-          // }
+          let temp_club_name = club.name["fr-FR"];
           buf.push({
             id: player.id,
             name: player.lastName,
@@ -73,41 +69,19 @@ function sort_player(data_player, data_club) {
 
 function ButtonPlayer({ elem }) {
   const { id, set_id } = useContext(MpgContext);
-  // const [id_url, set_id_url] = useState(null);
   const [is, set_is] = useToggle(false);
-  // const show_detail = (event) => {
-  //   event.preventDefault();
-  //   console.log("ça clic, ça claque, ça déboite");
-  // };
-  // function set_page_detail(value) {
-  //   set_id(value);
-  //   // console.log("id", id);
-  // }
-
-  // useEffect(() => {
-  //   set_id_url();
-  // }, []);
 
   const set_page_detail = (value) => {
     set_id(value);
   };
 
   return (
-    // <div style={{ cursor: "pointer" }} onClick={set_page_detail(elem.id)}>
-    // <button style={{ cursor: "pointer" }} onClick={set_page_detail(elem.id)}>
     <button style={{ cursor: "pointer" }} onClick={set_is}>
-      {/* {console.log("id", id)} */}
       <div>{String(is)}</div>
       <div>{elem.name}</div>
       <div>{elem.pos}</div>
       <div>{elem.club_name}</div>
-      <div>{elem.id}</div>
-      <div>select id {id}</div>
       {is ? set_page_detail(elem.id) : set_page_detail(id)}
-      {set_is}
-      {/* <div>select id url {id_url}</div> */}
-      {/* <div>{is}</div> */}
-      {/* <div>{set_id(elem.id)}</div> */}
     </button>
   );
 }
@@ -119,9 +93,7 @@ function DisplayPlayers({ data_player, data_club }) {
     return (
       <div>
         {buf.map((elem) => (
-          // <MpgContext.Provider>
           <ButtonPlayer elem={elem} />
-          // </MpgContext.Provider>
         ))}
       </div>
     );
@@ -174,9 +146,6 @@ export function Home() {
   return (
     <View style={{ flex: 1, flexDirection: "row", backgroundColor: "magenta" }}>
       {load_api()}
-      {/* <View style={{ flex: 1, backgroundColor: "red" }}>
-        <DisplayClubs data={data_club} />
-      </View> */}
       <View style={{ flex: 1, backgroundColor: "yellow" }}>
         <DisplayPlayers data_player={data_player} data_club={data_club} />
       </View>

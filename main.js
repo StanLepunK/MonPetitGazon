@@ -15,12 +15,13 @@ export function Main() {
   return (
     <MpgContext.Provider value={{ id, set_id }}>
       <Router>
-        {/* <Home /> */}
+        <Link to="/">home</Link>
+        <Link to="/detail">detail</Link>
         <Switch>
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/details">
+          <Route exact path="/detail">
             <Detail />
           </Route>
         </Switch>
