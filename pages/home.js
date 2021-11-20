@@ -8,23 +8,6 @@ import { useToggle } from "../hooks/toggle";
 
 import { MpgContext } from "../main";
 
-function DisplayClubs({ data }) {
-  if (data !== undefined && data.championshipClubs !== undefined) {
-    const keys = Object.keys(data.championshipClubs);
-    return (
-      <div>
-        {keys.map((key, elem) => (
-          <div>
-            <div>{key}</div>
-            <div>{data.championshipClubs[key].name["fr-FR"]}</div>
-          </div>
-        ))}
-      </div>
-    );
-  }
-  return null;
-}
-
 function get_club_name(id, list) {
   for (let i = 0; i < list.length; i++) {
     if (id === list[i]) {
@@ -104,29 +87,21 @@ function ButtonPlayer({ elem }) {
   const [is, set_is] = useToggle(false);
 
   const set_page_detail = (value) => {
+    console.log("elem.id", value);
     set_id(value);
   };
   return (
     <Link to="/detail">
-      <button style={{ cursor: "pointer" }} onClick={set_page_detail(elem.id)}>
-        {/* <div>{String(is)}</div> */}
+      <button
+        style={{ cursor: "pointer" }}
+        onClick={() => set_page_detail(elem.id)}
+      >
         <div>{elem.name}</div>
         <div>{elem.pos}</div>
         <div>{elem.club_name}</div>
       </button>
     </Link>
   );
-
-  // return (
-  //   <button style={{ cursor: "pointer" }} onClick={set_is}>
-  //     <div>{String(is)}</div>
-  //     <div>{elem.name}</div>
-  //     <div>{elem.pos}</div>
-  //     <div>{elem.club_name}</div>
-  //     {is ? set_page_detail(elem.id) : set_page_detail(id)}
-  //     <Link to="/detail" />
-  //   </button>
-  // );
 }
 
 function DisplayPlayers({ data_player, data_club, sort_by }) {
@@ -201,13 +176,16 @@ export function Home() {
     <View style={{ flex: 1, flexDirection: "row", backgroundColor: "magenta" }}>
       {load_api()}
       <View style={{ flex: 1 }}>
-        <button style={{ cursor: "pointer" }} onClick={sort_by_name}>
+        <button style={{ cursor: "pointer" }} onClick={() => sort_by_name()}>
           trier par nom
         </button>
-        <button style={{ cursor: "pointer" }} onClick={sort_by_club}>
+        <button style={{ cursor: "pointer" }} onClick={() => sort_by_club()}>
           trier par club
         </button>
-        <button style={{ cursor: "pointer" }} onClick={sort_by_position}>
+        <button
+          style={{ cursor: "pointer" }}
+          onClick={() => sort_by_position()}
+        >
           trier par position
         </button>
       </View>
