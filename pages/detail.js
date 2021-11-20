@@ -1,5 +1,6 @@
 import React from "react";
 import { View } from "react-native";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
 
@@ -46,6 +47,7 @@ export function Detail() {
 
   return (
     <View>
+      <Link to="/">home</Link>
       {load_detail(id)}
       {/* <div>{console.log(id)}</div> */}
       <DisplayDetail data={data} />

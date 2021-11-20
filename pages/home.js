@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { View, Button } from "react-native";
 import { useState, useEffect } from "react";
 import { useContext } from "react";
@@ -105,22 +106,32 @@ function ButtonPlayer({ elem }) {
   const set_page_detail = (value) => {
     set_id(value);
   };
-
   return (
-    <button style={{ cursor: "pointer" }} onClick={set_is}>
-      <div>{String(is)}</div>
-      <div>{elem.name}</div>
-      <div>{elem.pos}</div>
-      <div>{elem.club_name}</div>
-      {is ? set_page_detail(elem.id) : set_page_detail(id)}
-    </button>
+    <Link to="/detail">
+      <button style={{ cursor: "pointer" }} onClick={set_page_detail(elem.id)}>
+        {/* <div>{String(is)}</div> */}
+        <div>{elem.name}</div>
+        <div>{elem.pos}</div>
+        <div>{elem.club_name}</div>
+      </button>
+    </Link>
   );
+
+  // return (
+  //   <button style={{ cursor: "pointer" }} onClick={set_is}>
+  //     <div>{String(is)}</div>
+  //     <div>{elem.name}</div>
+  //     <div>{elem.pos}</div>
+  //     <div>{elem.club_name}</div>
+  //     {is ? set_page_detail(elem.id) : set_page_detail(id)}
+  //     <Link to="/detail" />
+  //   </button>
+  // );
 }
 
-function DisplayPlayers({ data_player, data_club }) {
+function DisplayPlayers({ data_player, data_club, sort_by }) {
   if (data_player !== undefined) {
-    const buf = sort_player(data_player, data_club, "club");
-
+    const buf = sort_player(data_player, data_club, sort_by);
     return (
       <div>
         {buf.map((elem) => (
@@ -133,6 +144,7 @@ function DisplayPlayers({ data_player, data_club }) {
 }
 
 export function Home() {
+  const [sort_by, set_sort_by] = useState("name");
   const [data_club, set_data_club] = useState({});
   const [data_player, set_data_player] = useState({});
 
@@ -174,11 +186,37 @@ export function Home() {
     get_clubs();
   }
 
+  function sort_by_name() {
+    set_sort_by("name");
+  }
+
+  function sort_by_club() {
+    set_sort_by("club");
+  }
+  function sort_by_position() {
+    set_sort_by("position");
+  }
+
   return (
     <View style={{ flex: 1, flexDirection: "row", backgroundColor: "magenta" }}>
       {load_api()}
-      <View style={{ flex: 1, backgroundColor: "yellow" }}>
-        <DisplayPlayers data_player={data_player} data_club={data_club} />
+      <View style={{ flex: 1 }}>
+        <button style={{ cursor: "pointer" }} onClick={sort_by_name}>
+          trier par nom
+        </button>
+        <button style={{ cursor: "pointer" }} onClick={sort_by_club}>
+          trier par club
+        </button>
+        <button style={{ cursor: "pointer" }} onClick={sort_by_position}>
+          trier par position
+        </button>
+      </View>
+      <View style={{ flex: 4, backgroundColor: "yellow" }}>
+        <DisplayPlayers
+          data_player={data_player}
+          data_club={data_club}
+          sort_by={sort_by}
+        />
       </View>
     </View>
   );

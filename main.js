@@ -15,8 +15,6 @@ export function Main() {
   return (
     <MpgContext.Provider value={{ id, set_id }}>
       <Router>
-        <Link to="/">home</Link>
-        <Link to="/detail">detail</Link>
         <Switch>
           <Route exact path="/">
             <Home />
