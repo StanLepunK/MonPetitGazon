@@ -3,15 +3,25 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Link, Switch, Route } from "react-router-dom";
 import { useState } from "react";
+
+// import { MpgContext } from "./context";
 import { createContext } from "react";
+
+export type GlobalContent = {
+  id: string | undefined;
+  set_id: (c: string) => void;
+};
+
+export const MpgContext = createContext<GlobalContent>({
+  id: "no idea",
+  set_id: () => {},
+});
 
 import { Home } from "./pages/home";
 import { Detail } from "./pages/detail";
 
-export const MpgContext = createContext(null);
-
 export function Main() {
-  const [id, set_id] = useState();
+  const [id, set_id] = useState<string>();
   return (
     <MpgContext.Provider value={{ id, set_id }}>
       <Router>

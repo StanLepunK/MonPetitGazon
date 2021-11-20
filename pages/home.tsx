@@ -8,7 +8,7 @@ import { useToggle } from "../hooks/toggle";
 
 import { MpgContext } from "../main";
 
-function get_club_name(id, list) {
+function get_club_name(id: string, list: any) {
   for (let i = 0; i < list.length; i++) {
     if (id === list[i]) {
       return list[i];
@@ -16,10 +16,10 @@ function get_club_name(id, list) {
   }
 }
 
-function sort_player(data_player, data_club, sort_by) {
+function sort_player(data_player: any, data_club: any, sort_by: string) {
   const [sort_is, set_sort_is] = useState(false);
   const [list, set_list] = useState([]);
-  const buf = [];
+  const buf: any = [];
   if (
     data_player !== undefined &&
     data_player.poolPlayers !== undefined &&
@@ -47,10 +47,10 @@ function sort_player(data_player, data_club, sort_by) {
     set_sort_is(true);
   }
   if (sort_by === "position") {
-    list.sort((a, b) => b.pos - a.pos);
+    list.sort((a: any, b: any) => b.pos - a.pos);
   }
   if (sort_by === "name") {
-    list.sort((a, b) => {
+    list.sort((a: any, b: any) => {
       let str_a = a.name.toLowerCase();
       let str_b = b.name.toLowerCase();
 
@@ -65,7 +65,7 @@ function sort_player(data_player, data_club, sort_by) {
   }
 
   if (sort_by === "club") {
-    list.sort((a, b) => {
+    list.sort((a: any, b: any) => {
       let str_a = a.club_name.toLowerCase();
       let str_b = b.club_name.toLowerCase();
 
@@ -86,8 +86,8 @@ function ButtonPlayer({ elem }) {
   const { id, set_id } = useContext(MpgContext);
   const [is, set_is] = useToggle(false);
 
-  const set_page_detail = (value) => {
-    console.log("elem.id", value);
+  const set_page_detail = (value: string) => {
+    // console.log("elem.id", value);
     set_id(value);
   };
   return (
