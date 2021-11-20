@@ -32,11 +32,10 @@ function get_club_name(id, list) {
   }
 }
 
-function sort_player(data_player, data_club) {
+function sort_player(data_player, data_club, sort_by) {
   const [sort_is, set_sort_is] = useState(false);
   const [list, set_list] = useState([]);
   const buf = [];
-  let rank = -1;
   if (
     data_player !== undefined &&
     data_player.poolPlayers !== undefined &&
@@ -48,7 +47,7 @@ function sort_player(data_player, data_club) {
       const player = data_player.poolPlayers[key_p];
       list_club.map((key_c, elem_c) => {
         const club = data_club.championshipClubs[key_c];
-        if (player.ultraPosition > rank && player.clubId === key_c) {
+        if (player.clubId === key_c) {
           let temp_club_name = club.name["fr-FR"];
           buf.push({
             id: player.id,
@@ -57,13 +56,45 @@ function sort_player(data_player, data_club) {
             club_id: player.clubId,
             club_name: temp_club_name,
           });
-          rank = player.ultraPosition;
         }
       });
     });
     set_list(buf);
     set_sort_is(true);
   }
+  if (sort_by === "position") {
+    list.sort((a, b) => b.pos - a.pos);
+  }
+  if (sort_by === "name") {
+    list.sort((a, b) => {
+      let str_a = a.name.toLowerCase();
+      let str_b = b.name.toLowerCase();
+
+      if (str_a < str_b) {
+        return -1;
+      }
+      if (str_a > str_b) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  if (sort_by === "club") {
+    list.sort((a, b) => {
+      let str_a = a.club_name.toLowerCase();
+      let str_b = b.club_name.toLowerCase();
+
+      if (str_a < str_b) {
+        return -1;
+      }
+      if (str_a > str_b) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
   return list;
 }
 
@@ -88,7 +119,7 @@ function ButtonPlayer({ elem }) {
 
 function DisplayPlayers({ data_player, data_club }) {
   if (data_player !== undefined) {
-    const buf = sort_player(data_player, data_club);
+    const buf = sort_player(data_player, data_club, "club");
 
     return (
       <div>
