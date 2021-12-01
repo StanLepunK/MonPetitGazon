@@ -5,7 +5,7 @@ Test technique React-Natvie API Mon petit gazon
 
 # Pour lancer
 
-installer (Expo)[https://expo.dev/] sur mac
+installer [Expo](https://expo.dev/) sur mac
 
 $ sudo npm install -g expo-cli
 
@@ -21,5 +21,5 @@ Puis sélectionnez votre option dans le terminal.
 
 # TypeScript
 
-(Transform a JavaScript project to TypeScript)[https://reactnative.dev/docs/typescript]
+[Transform a JavaScript project to TypeScript](https://reactnative.dev/docs/typescript)
 
