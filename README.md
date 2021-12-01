@@ -7,11 +7,11 @@ Test technique React-Natvie API Mon petit gazon
 
 installer [Expo](https://expo.dev/) sur mac
 
-$ sudo npm install -g expo-cli
+`$ sudo npm install -g expo-cli`
 
 puis pour vérifier les mises à jour de votre code
 
-$ brew install watchman
+`$ brew install watchman`
 
 puis
 
