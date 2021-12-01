@@ -50,7 +50,6 @@ export function Detail() {
     <View>
       <Link to="/">home</Link>
       {load_detail(id)}
-      {/* <div>{console.log(id)}</div> */}
       <DisplayDetail data={data} />
     </View>
   );
