@@ -15,7 +15,7 @@ puis pour vérifier les mises à jour de votre code
 
 puis
 
-$ yarn start
+`$ yarn start`
 
 Puis sélectionnez votre option dans le terminal.
 
