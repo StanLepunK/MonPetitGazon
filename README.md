@@ -8,7 +8,7 @@ Test technique React-Natvie API Mon petit gazon
 
 # pour lancer
 
-instaler Expo
+installer Expo
 
 sur mac
 
@@ -22,4 +22,4 @@ puis
 
 $ yarn start
 
-selectionner ensuite votre option dans le terminal.
+Puis sélectionnez votre option dans le terminal.
